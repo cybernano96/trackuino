@@ -26,8 +26,8 @@
 // Refuse to compile on arduino version 21 or lower. 22 includes an 
 // optimization of the USART code that is critical for real-time operation
 // of the AVR code.
-#elif (ARDUINO + 0) < 22
-#error "Oops! We need Arduino 22 or 23"
+#elif (ARDUINO + 0) < 180
+#error "Oops! We need Arduino 1.8 or higher"
 #error "See trackuino.pde for details on this"
 
 #endif
@@ -46,12 +46,7 @@
 #include "sensors_pic32.h"
 #include "dra818.h"
 
-// Arduino/AVR libs
-#if (ARDUINO + 1) >= 100
-#  include <Arduino.h>
-#else
-#  include <WProgram.h>
-#endif
+#include <Arduino.h>
 
 // Module constants
 static const uint32_t VALID_POS_TIMEOUT = 2000;  // ms
@@ -59,24 +54,26 @@ static const uint32_t VALID_POS_TIMEOUT = 2000;  // ms
 // Module variables
 static int32_t next_aprs = 0;
 
-
 void setup()
 {
+  //LED Pin
   pinMode(LED_PIN, OUTPUT);
-  // Due to a problem on V1 PCB we cannot use D12
-  pinMode(12, INPUT);
   pin_write(LED_PIN, LOW);
+  
+  // Due to a problem on V1.00 PCB we cannot use D12
+  pinMode(12, INPUT);
 
+  // Start GPS
   Serial.begin(GPS_BAUDRATE);
 #ifdef DEBUG_RESET
   Serial.println("RESET");
 #endif
 
+  // init all components
   buzzer_setup();
   afsk_setup();
   gps_setup();
   sensors_setup();
-
   dorji_sequence();
   
 #ifdef DEBUG_SENS

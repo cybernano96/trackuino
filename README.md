@@ -1,10 +1,12 @@
 ![Banner](https://github.com/trackuino/trackuino/wiki/img/trackuino-banner-narrow.png)
 
-This is a modified firmware based on Trackuino, an open-source APRS tracker based on the Arduino platform. It was designed primarily to track high altitude balloons, so it has other handy features like reading temperature sensors and a buzzer for acoustic location.
+This is a modified version of "Trackuino": an open-source APRS tracker based on the Arduino platform. It was designed primarily to track high altitude balloons, so it has other handy features like reading temperature sensors and a buzzer for acoustic location.
 
 Trackuino is intended for use by licensed radio amateurs.
 
-This version supports serial via SoftwareSerial and the DRA818V radio module
+This modified version supports serial via SoftwareSerial and the DRA818V radio module
+
+**Please note:** This project is a fork of Trackuino, they are the original creators of the code.
 
 Features
 ========
@@ -19,6 +21,15 @@ Features
  * 1 x SMA female plugs (radio out)
  * Open source (GPLv2 license), both software and hardware. In other words, do whatever you want with it: modify it, add it to your project, etc. as long as you opensource your modifications as well.
 
+Status
+========
+
+ * GPS currently via hardware pins (no SoftwareSerial yet)
+ * DRA818V ok!
+ * APRS AF OUT ok!
+ * Buzzer ok!
+ * Temp Sensor ok!
+
 Download
 ========
 
@@ -29,9 +40,7 @@ Use the `Download ZIP` button to get the source code.
 Building
 ========
 
-If you are building for the Arduino platform you need Arduino IDE version 0023 or higher (tested with versions 0023, 1.0.x and 1.5.x). Get it from the [Arduino web site](http://arduino.cc/).
-
-If you are building for the Chipkit Uno32 you need the Mpide IDE. Tested with 0023-20130715. Get it from the [Chipkit site](http://chipkit.net/).
+If you are building for the Arduino platform you need Arduino IDE version 1.8.13 or higher. Get it from the [Arduino web site](http://arduino.cc/).
 
 Unzip the firmware in your sketches directory and load it up by double-clicking on trackuino.ino.
 
