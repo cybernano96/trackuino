@@ -15,25 +15,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef __GPS_H__
-#define __GPS_H__
+#ifndef __DRA818_H__
+#define __DRA818_H__
 
-#include <stdint.h>
 #include <SoftwareSerial.h>
+#include "pin.h"
 
-extern char gps_time[7];       // HHMMSS
-extern uint32_t gps_seconds;   // seconds after midnight
-extern char gps_date[7];       // DDMMYY
-extern float gps_lat;
-extern float gps_lon;
-extern char gps_aprs_lat[9];
-extern char gps_aprs_lon[10];
-extern float gps_course;
-extern float gps_speed;
-extern float gps_altitude;
-
-void gps_setup();
-bool gps_decode(char c);
-void gps_reset_parser();
+void dorji_sequence();
+void dorji_init(SoftwareSerial &ser);
+void dorji_reset(SoftwareSerial &ser);
+void dorji_setfreq(float txf, float rxf, SoftwareSerial &ser);
+void dorji_readback(SoftwareSerial &ser);
 
 #endif

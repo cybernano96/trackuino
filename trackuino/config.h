@@ -39,8 +39,8 @@
 // - Cars:       9
 // - Home:       0
 // - IGate:      5
-#define S_CALLSIGN      "MYCALL"
-#define S_CALLSIGN_ID   11
+#define S_CALLSIGN      "IU2FRL"
+#define S_CALLSIGN_ID   8
 
 // Destination callsign: APRS (with SSID=0) is usually okay.
 #define D_CALLSIGN      "APRS"
@@ -56,7 +56,7 @@
 // APRS comment: this goes in the comment portion of the APRS message. You
 // might want to keep this short. The longer the packet, the more vulnerable
 // it is to noise. 
-#define APRS_COMMENT    "Trackuino reminder: replace callsign with your own"
+#define APRS_COMMENT    "Mini APRS Tracker by IU2FRL on my HD Iron 883"
 
 
 // --------------------------------------------------------------------------
@@ -85,10 +85,10 @@
 #define APRS_SLOT     0     // seconds. -1 disables slotted transmissions
 #define APRS_PERIOD   60    // seconds
 
-// GPS baud rate (in bits per second). This is also the baud rate at which
-// debug data will be printed out the serial port.
+// GPS baud rate (in bits per second).
 #define GPS_BAUDRATE  9600
-
+#define GPS_RX        8
+#define GPS_TX        9
 
 // --------------------------------------------------------------------------
 // Modem config (afsk.cpp)
@@ -111,7 +111,17 @@
 // --------------------------------------------------------------------------
 
 // This is the PTT pin
-#define PTT_PIN           4
+#define PTT_PIN           7
+#define POW_PIN           5
+#define RTXD              10
+#define RRXD              11
+#define RPD               6
+#define RBAUD             9600
+#define TXFREQ            144.800
+#define RXFREQ            144.800
+
+// TX power 1: HIGH 0: LOW
+#define POUT 0
 
 // --------------------------------------------------------------------------
 // Sensors config (sensors.cpp)
@@ -140,10 +150,10 @@
 
 // Pin mappings for the internal / external temperature sensors. VS refers
 // to (arduino) digital pins, whereas VOUT refers to (arduino) analog pins.
-#define INTERNAL_LM60_VS_PIN     6
-#define INTERNAL_LM60_VOUT_PIN   0
-#define EXTERNAL_LM60_VS_PIN     7
-#define EXTERNAL_LM60_VOUT_PIN   1
+#define INTERNAL_LM60_VS_PIN     A0
+#define INTERNAL_LM60_VOUT_PIN   A1
+#define EXTERNAL_LM60_VS_PIN     A3
+#define EXTERNAL_LM60_VOUT_PIN   A4
 
 // Units for temperature sensors (Added by: Kyle Crockett)
 // 1 = Celsius, 2 = Kelvin, 3 = Fahrenheit
@@ -214,13 +224,13 @@
 // 3. When flashing the firmware, disconnect the GPS from the RX pin or you
 //    will get errors.
 
-// #define DEBUG_GPS    // GPS sentence dump and checksum validation
+#define DEBUG_GPS    // GPS sentence dump and checksum validation
 // #define DEBUG_AX25   // AX.25 frame dump
 // #define DEBUG_MODEM  // Modem ISR overrun and profiling
 // #define DEBUG_AFSK   // AFSK (modulation) output
 // #define DEBUG_RESET  // AVR reset
 // #define DEBUG_SENS   // Sensors
+#define DEBUG_RTX // DRA module
 
 
 #endif
-

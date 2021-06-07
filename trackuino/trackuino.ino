@@ -44,6 +44,7 @@
 #include "power.h"
 #include "sensors_avr.h"
 #include "sensors_pic32.h"
+#include "dra818.h"
 
 // Arduino/AVR libs
 #if (ARDUINO + 1) >= 100
@@ -62,6 +63,8 @@ static int32_t next_aprs = 0;
 void setup()
 {
   pinMode(LED_PIN, OUTPUT);
+  // Due to a problem on V1 PCB we cannot use D12
+  pinMode(12, INPUT);
   pin_write(LED_PIN, LOW);
 
   Serial.begin(GPS_BAUDRATE);
@@ -74,6 +77,8 @@ void setup()
   gps_setup();
   sensors_setup();
 
+  dorji_sequence();
+  
 #ifdef DEBUG_SENS
   Serial.print("Ti=");
   Serial.print(sensors_int_lm60());

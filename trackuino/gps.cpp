@@ -24,6 +24,7 @@
 #endif
 #include <stdlib.h>
 #include <string.h>
+#include <SoftwareSerial.h>
 
 // Module declarations
 static void parse_sentence_type(const char * token);
@@ -379,4 +380,3 @@ bool gps_decode(char c)
   }
   return ret;
 }
-
