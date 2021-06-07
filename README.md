@@ -1,20 +1,22 @@
 ![Banner](https://github.com/trackuino/trackuino/wiki/img/trackuino-banner-narrow.png)
 
-This is the firmware for Trackuino, an open-source APRS tracker based on the Arduino platform. It was designed primarily to track high altitude balloons, so it has other handy features like reading temperature sensors and a buzzer for acoustic location.
+This is a modified firmware based on Trackuino, an open-source APRS tracker based on the Arduino platform. It was designed primarily to track high altitude balloons, so it has other handy features like reading temperature sensors and a buzzer for acoustic location.
 
 Trackuino is intended for use by licensed radio amateurs.
+
+This version supports serial via SoftwareSerial and the DRA818V radio module
 
 Features
 ========
 
- * Arduino shield form factor (you can stack more shields on it)
- * GPS: Venus 638FLPx. Reports okay above 18 Km.
- * Radio: Radiometrix's HX1 (300 mW).
+ * Custom PCB
+ * GPS: any NMEA GPS will work fine
+ * Radio: DRA818V (500/1000 mW).
  * 1200 bauds AFSK using 8-bit PWM
  * Sends out standard APRS position messages (latitude, longitude, altitude, course, speed and time).
  * Internal/external temperature sensors (LM60) to read temperature in and outside the payload
  * Active/passive buzzer support to ease acoustic payload location.
- * 2 x SMA female plugs (1 x GPS in + 1 x radio out)
+ * 1 x SMA female plugs (radio out)
  * Open source (GPLv2 license), both software and hardware. In other words, do whatever you want with it: modify it, add it to your project, etc. as long as you opensource your modifications as well.
 
 Download
@@ -43,18 +45,18 @@ Flashing
 Hardware
 ========
 
-The [Trackuino shield](https://github.com/trackuino/shield) repository contains the Eagle schematic / pcb files of a shield you can build as-is (gerber files are included) or modify to suit your needs. Check its README for details.
+The [Mini APRS Tracker](https://www.iu2frl.it/micro-aprs-tracker/) contains all the informations. PCB drawings coming soon!
 
 Related projects
 ================
 
 Some other HAB-related projects I wrote:
 
-  * https://github.com/trackuino/hab-tracker - balloon trajectory prediction tool for Android 
-  * https://github.com/trackuino/aprsdb - an efficient and queriable APRS database server (required by the Hab Tracker Android app)
-  * https://github.com/trackuino/chdk-intervalometer - a LUA intervalometer for the old Canon A570IS camera (which might work on other CHDK cameras too)
+  * https://www.iu2frl.it/tracker-aprs-su-icom-ic-e2820/ - APRS Tracker for ICOM IC-2820
+  * https://www.iu2frl.it/arduino-aprs-beacon/ - an APRS beacon
+  * https://www.iu2frl.it/category/autocostruzione/aprs-autocostruzione/ - APRS related articles
 
 Support
 =======
 
-Discuss firmware bugs or suggestions in the issue tracker, or ask for help at the [http://hab-ham.org/forum/](hab-ham.org forum).
+Discuss firmware bugs or suggestions in the issue tracker.
