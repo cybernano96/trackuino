@@ -24,7 +24,7 @@ Features
 Status
 ========
 
- * GPS currently via hardware pins (no SoftwareSerial yet)
+ * GPS ok!
  * DRA818V ok!
  * APRS AF OUT ok!
  * Buzzer ok!

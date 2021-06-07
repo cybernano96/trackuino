@@ -54,6 +54,11 @@ static const uint32_t VALID_POS_TIMEOUT = 2000;  // ms
 // Module variables
 static int32_t next_aprs = 0;
 
+// Current FIX ok
+bool nowfix = false;
+// At least one FIX
+bool onefix = true;
+
 SoftwareSerial gpsSerial(GPS_RX, GPS_TX);
 
 void setup()

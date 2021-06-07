@@ -40,7 +40,7 @@
 // - Home:       0
 // - IGate:      5
 #define S_CALLSIGN      "IU2FRL"
-#define S_CALLSIGN_ID   8
+#define S_CALLSIGN_ID   10
 
 // Destination callsign: APRS (with SSID=0) is usually okay.
 #define D_CALLSIGN      "APRS"
@@ -56,8 +56,11 @@
 // APRS comment: this goes in the comment portion of the APRS message. You
 // might want to keep this short. The longer the packet, the more vulnerable
 // it is to noise. 
-#define APRS_COMMENT    "Mini APRS Tracker by IU2FRL on my HD Iron 883"
-
+#define APRS_COMMENT    "Mini APRS Tracker by IU2FRL riding my HD Iron 883"
+#define APRS_COMMENT_NOFIX    "Mini APRS Tracker by IU2FRL - Waiting for GPS FIX"
+#define APRS_SYMBOL '<' // '<': Motorcycle '>': Car
+#define START_LAT "4510.34N"  // GPS Coordinates when no fix yet (APRS Format!)
+#define START_LOT "01047.13E"
 
 // --------------------------------------------------------------------------
 // AX.25 config (ax25.cpp)
