@@ -54,6 +54,8 @@ static const uint32_t VALID_POS_TIMEOUT = 2000;  // ms
 // Module variables
 static int32_t next_aprs = 0;
 
+SoftwareSerial gpsSerial(GPS_RX, GPS_TX);
+
 void setup()
 {
   //LED Pin
@@ -75,6 +77,12 @@ void setup()
   gps_setup();
   sensors_setup();
   dorji_sequence();
+  //gps_init();
+
+  gpsSerial.begin(GPS_BAUDRATE);
+  #ifdef DEBUG_GPS
+      Serial.println("GPS Started");
+  #endif
   
 #ifdef DEBUG_SENS
   Serial.print("Ti=");
@@ -89,9 +97,9 @@ void setup()
   // for slotted transmissions.
   if (APRS_SLOT >= 0) {
     do {
-      while (! Serial.available())
+      while (! gpsSerial.available())
         power_save();
-    } while (! gps_decode(Serial.read()));
+    } while (! gps_decode(gpsSerial.read()));
     
     next_aprs = millis() + 1000 *
       (APRS_PERIOD - (gps_seconds + APRS_PERIOD - APRS_SLOT) % APRS_PERIOD);
@@ -117,7 +125,7 @@ void get_pos()
 
   do {
     if (Serial.available())
-      valid_pos = gps_decode(Serial.read());
+      valid_pos = gps_decode(gpsSerial.read());
   } while ( (millis() - timeout < VALID_POS_TIMEOUT) && ! valid_pos) ;
 
   if (valid_pos) {
@@ -147,8 +155,8 @@ void loop()
 
   } else {
     // Discard GPS data received during sleep window
-    while (Serial.available()) {
-      Serial.read();
+    while (gpsSerial.available()) {
+      gpsSerial.read();
     }
   }
 

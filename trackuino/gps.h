@@ -35,5 +35,6 @@ extern float gps_altitude;
 void gps_setup();
 bool gps_decode(char c);
 void gps_reset_parser();
+//void gps_init();
 
 #endif

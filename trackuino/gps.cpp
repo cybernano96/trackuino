@@ -26,6 +26,8 @@
 #include <string.h>
 #include <SoftwareSerial.h>
 
+//SoftwareSerial gpsSerial(GPS_RX, GPS_TX);
+
 // Module declarations
 static void parse_sentence_type(const char * token);
 static void parse_time(const char *token);
@@ -37,6 +39,7 @@ static void parse_lon_hemi(const char *token);
 static void parse_speed(const char *token);
 static void parse_course(const char *token);
 static void parse_altitude(const char *token);
+//void gps_init(int baud);
 
 // Module types
 typedef void (*t_nmea_parser)(const char *token);
@@ -46,7 +49,6 @@ enum t_sentence_type {
   SENTENCE_GGA,
   SENTENCE_RMC
 };
-
 
 // Module constants
 static const t_nmea_parser unk_parsers[] = {
@@ -380,3 +382,12 @@ bool gps_decode(char c)
   }
   return ret;
 }
+
+/*
+void gps_init(int baud) {
+  gpsSerial.begin(GPS_BAUDRATE);
+  #ifdef DEBUG_GPS
+      Serial.println("GPS Started");
+  #endif
+}
+*/
