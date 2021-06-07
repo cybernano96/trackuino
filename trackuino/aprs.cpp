@@ -57,13 +57,13 @@ void aprs_send()
   ax25_send_string(gps_time);         // 170915 = 17h:09m:15s zulu (not allowed in Status Reports)
   ax25_send_byte('h');
   //if (fixOnce) {
-    ax25_send_string(gps_aprs_lat);     // Lat: 38deg and 22.20 min (.20 are NOT seconds, but 1/100th of minutes)
+  ax25_send_string(gps_aprs_lat);     // Lat: 38deg and 22.20 min (.20 are NOT seconds, but 1/100th of minutes)
   //} else {
   //  ax25_send_string(START_LAT);
   //}
   ax25_send_byte('/');                // Symbol table
   //if (fixOnce) {
-    ax25_send_string(gps_aprs_lon);     // Lon: 000deg and 25.80 min
+  ax25_send_string(gps_aprs_lon);     // Lon: 000deg and 25.80 min
   //} else {
   //  ax25_send_string(START_LON);
   //}

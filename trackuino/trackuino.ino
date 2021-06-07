@@ -55,9 +55,9 @@ static const uint32_t VALID_POS_TIMEOUT = 2000;  // ms
 static int32_t next_aprs = 0;
 
 // Current FIX ok
-bool nowfix = false;
+//bool nowfix = false;
 // At least one FIX
-bool onefix = true;
+//bool onefix = true;
 
 SoftwareSerial gpsSerial(GPS_RX, GPS_TX);
 
@@ -68,10 +68,10 @@ void setup()
   pin_write(LED_PIN, LOW);
   
   // Due to a problem on V1.00 PCB we cannot use D12
-  pinMode(12, INPUT);
+  //pinMode(12, INPUT);
 
   // Start GPS
-  Serial.begin(GPS_BAUDRATE);
+  Serial.begin(230400);
 #ifdef DEBUG_RESET
   Serial.println("RESET");
 #endif

@@ -57,8 +57,10 @@
 // might want to keep this short. The longer the packet, the more vulnerable
 // it is to noise. 
 #define APRS_COMMENT    "Mini APRS Tracker by IU2FRL riding my HD Iron 883"
-#define APRS_COMMENT_NOFIX    "Mini APRS Tracker by IU2FRL - Waiting for GPS FIX"
 #define APRS_SYMBOL '<' // '<': Motorcycle '>': Car
+
+// Not implemented yet!
+#define APRS_COMMENT_NOFIX    "Mini APRS Tracker by IU2FRL - Waiting for GPS FIX"
 #define START_LAT "4510.34N"  // GPS Coordinates when no fix yet (APRS Format!)
 #define START_LOT "01047.13E"
 
@@ -233,7 +235,7 @@
 // #define DEBUG_AFSK   // AFSK (modulation) output
 // #define DEBUG_RESET  // AVR reset
 // #define DEBUG_SENS   // Sensors
-#define DEBUG_RTX // DRA module
+// #define DEBUG_RTX // DRA module
 
 
 #endif
