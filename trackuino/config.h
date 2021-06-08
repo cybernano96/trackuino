@@ -62,7 +62,7 @@
 // Not implemented yet!
 #define APRS_COMMENT_NOFIX    "Mini APRS Tracker by IU2FRL - Waiting for GPS FIX"
 #define START_LAT "4510.34N"  // GPS Coordinates when no fix yet (APRS Format!)
-#define START_LOT "01047.13E"
+#define START_LON "01047.13E"
 
 // --------------------------------------------------------------------------
 // AX.25 config (ax25.cpp)
@@ -203,6 +203,14 @@
 #define BUZZER_PIN              9
 
 // --------------------------------------------------------------------------
+// Empty Pins
+// --------------------------------------------------------------------------
+
+// We declare two empty pins to avoid interference due to Serial interrupts
+#define EMPTYA  A0
+#define EMPTYB  A1
+
+// --------------------------------------------------------------------------
 // Debug
 // --------------------------------------------------------------------------
 
@@ -236,6 +244,6 @@
 // #define DEBUG_RESET  // AVR reset
 // #define DEBUG_SENS   // Sensors
 // #define DEBUG_RTX // DRA module
-
+// #define DEBUG_PROT // AX25 Protocol
 
 #endif

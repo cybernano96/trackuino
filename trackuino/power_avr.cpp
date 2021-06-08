@@ -69,6 +69,7 @@ void power_save()
   power_twi_disable();
 
   pin_write(LED_PIN, LOW);
+  //pin_write(RPD, LOW);
   sleep_mode();    // Go to sleep
   pin_write(LED_PIN, HIGH);
   

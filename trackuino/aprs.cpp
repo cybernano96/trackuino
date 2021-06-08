@@ -21,6 +21,7 @@
 #include "aprs.h"
 #include "sensors_avr.h"
 #include "sensors_pic32.h"
+#include "pin.h"
 #include <stdio.h>
 #include <stdlib.h>
 #if (ARDUINO + 1) >= 100
@@ -39,6 +40,8 @@ float meters_to_feet(float m)
 // Exported functions
 void aprs_send()
 {
+  //pin_write(RPD, HIGH);
+  //delay(500);
   char temp[12];                   // Temperature (int/ext)
   const struct s_address addresses[] = { 
     {D_CALLSIGN, D_CALLSIGN_ID},  // Destination callsign
@@ -54,16 +57,28 @@ void aprs_send()
   ax25_send_header(addresses, sizeof(addresses)/sizeof(s_address));
   ax25_send_byte('/');                // Report w/ timestamp, no APRS messaging. $ = NMEA raw data
   // ax25_send_string("021709z");     // 021709z = 2nd day of the month, 17:09 zulu (UTC/GMT)
+  #ifdef DEBUG_PROT
+  ax25_send_string("021709z");
+  #else
   ax25_send_string(gps_time);         // 170915 = 17h:09m:15s zulu (not allowed in Status Reports)
+  #endif
   ax25_send_byte('h');
   //if (fixOnce) {
+  #ifdef DEBUG_PROT
+  ax25_send_string(START_LAT);
+  #else
   ax25_send_string(gps_aprs_lat);     // Lat: 38deg and 22.20 min (.20 are NOT seconds, but 1/100th of minutes)
+  #endif
   //} else {
   //  ax25_send_string(START_LAT);
   //}
   ax25_send_byte('/');                // Symbol table
   //if (fixOnce) {
+  #ifdef DEBUG_PROT
+  ax25_send_string(START_LON);
+  #else
   ax25_send_string(gps_aprs_lon);     // Lon: 000deg and 25.80 min
+  #endif
   //} else {
   //  ax25_send_string(START_LON);
   //}

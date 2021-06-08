@@ -60,9 +60,13 @@ static int32_t next_aprs = 0;
 //bool onefix = true;
 
 SoftwareSerial gpsSerial(GPS_RX, GPS_TX);
+SoftwareSerial fakeSerial(EMPTYA, EMPTYB);
 
 void setup()
 {
+  // Start Serial
+  Serial.begin(230400);
+  
   //LED Pin
   pinMode(LED_PIN, OUTPUT);
   pin_write(LED_PIN, LOW);
@@ -70,8 +74,6 @@ void setup()
   // Due to a problem on V1.00 PCB we cannot use D12
   //pinMode(12, INPUT);
 
-  // Start GPS
-  Serial.begin(230400);
 #ifdef DEBUG_RESET
   Serial.println("RESET");
 #endif
@@ -82,9 +84,10 @@ void setup()
   gps_setup();
   sensors_setup();
   dorji_sequence();
-  //gps_init();
 
+  fakeSerial.begin(GPS_BAUDRATE);
   gpsSerial.begin(GPS_BAUDRATE);
+  
   #ifdef DEBUG_GPS
       Serial.println("GPS Started");
   #endif
@@ -98,6 +101,10 @@ void setup()
   Serial.println(sensors_vin());
 #endif
 
+#ifdef DEBUG_PROT
+    // Transmit empty data just to check AF OUT
+    next_aprs = millis() + 3000;
+#else
   // Do not start until we get a valid time reference
   // for slotted transmissions.
   if (APRS_SLOT >= 0) {
@@ -112,12 +119,15 @@ void setup()
   else {
     next_aprs = millis();
   }  
+#endif
   // TODO: beep while we get a fix, maybe indicating the number of
   // visible satellites by a series of short beeps?
 }
 
 void get_pos()
-{
+{ 
+  gpsSerial.listen();
+  
   // Get a valid position from the GPS
   int valid_pos = 0;
   uint32_t timeout = millis();
@@ -147,8 +157,15 @@ void loop()
   // Time for another APRS frame
   if ((int32_t) (millis() - next_aprs) >= 0) {
     get_pos();
+    fakeSerial.listen();
+    delay(500);
     aprs_send();
+    
+    #ifdef DEBUG_PROT
+    next_aprs += 3000;
+    #else
     next_aprs += APRS_PERIOD * 1000L;
+    #endif
     while (afsk_flush()) {
       power_save();
     }
@@ -159,6 +176,12 @@ void loop()
 #endif
 
   } else {
+    #ifdef DEBUG_GPS
+      Serial.println("GPS Receive");
+    #endif
+    
+    gpsSerial.listen();
+    
     // Discard GPS data received during sleep window
     while (gpsSerial.available()) {
       gpsSerial.read();
