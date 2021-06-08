@@ -245,5 +245,6 @@
 // #define DEBUG_SENS   // Sensors
 // #define DEBUG_RTX // DRA module
 // #define DEBUG_PROT // AX25 Protocol
+// #define SENSORS // Enables Sensor Output
 
 #endif

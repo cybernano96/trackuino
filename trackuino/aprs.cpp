@@ -57,32 +57,33 @@ void aprs_send()
   ax25_send_header(addresses, sizeof(addresses)/sizeof(s_address));
   ax25_send_byte('/');                // Report w/ timestamp, no APRS messaging. $ = NMEA raw data
   // ax25_send_string("021709z");     // 021709z = 2nd day of the month, 17:09 zulu (UTC/GMT)
-  #ifdef DEBUG_PROT
+ #ifdef DEBUG_PROT
   ax25_send_string("021709z");
-  #else
+ #else
   ax25_send_string(gps_time);         // 170915 = 17h:09m:15s zulu (not allowed in Status Reports)
-  #endif
+ #endif
   ax25_send_byte('h');
   //if (fixOnce) {
-  #ifdef DEBUG_PROT
+ #ifdef DEBUG_PROT
   ax25_send_string(START_LAT);
-  #else
+ #else
   ax25_send_string(gps_aprs_lat);     // Lat: 38deg and 22.20 min (.20 are NOT seconds, but 1/100th of minutes)
-  #endif
+ #endif
   //} else {
   //  ax25_send_string(START_LAT);
   //}
   ax25_send_byte('/');                // Symbol table
   //if (fixOnce) {
-  #ifdef DEBUG_PROT
+ #ifdef DEBUG_PROT
   ax25_send_string(START_LON);
-  #else
+ #else
   ax25_send_string(gps_aprs_lon);     // Lon: 000deg and 25.80 min
-  #endif
+ #endif
   //} else {
   //  ax25_send_string(START_LON);
   //}
   ax25_send_byte(APRS_SYMBOL);                // Symbol: O=balloon, -=QTH
+ #ifdef SENSORS
   snprintf(temp, 4, "%03d", (int)(gps_course + 0.5)); 
   ax25_send_string(temp);             // Course (degrees)
   ax25_send_byte('/');                // and
@@ -100,6 +101,7 @@ void aprs_send()
   ax25_send_string("/V=");
   snprintf(temp, 6, "%d", sensors_vin());
   ax25_send_string(temp);
+ #endif
   ax25_send_byte(' ');
   //if (fixNow) {
   ax25_send_string(APRS_COMMENT);     // Comment
